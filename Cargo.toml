@@ -1,0 +1,7 @@
+[package]
+name = "assemblage"
+version = "0.1.0"
+authors = ["shiba"]
+edition = "2018"
+
+[dependencies]
