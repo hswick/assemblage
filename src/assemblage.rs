@@ -12,14 +12,7 @@ pub struct ExtrinsicRelation {
 
 impl fmt::Display for ExtrinsicRelation {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match &self.label {
-            Some(l) => {
-                write!(f, "({}, {}, {}, {})", l, self.source, self.target, self.intensity)
-            },
-            None => {
-                write!(f, "({}, {}, {})", self.source, self.target, self.intensity)
-            }
-        }
+        write!(f, "{:#?}", self)
     }
 }
 
@@ -50,7 +43,7 @@ pub struct Assemblage {
 impl Assemblage {
 
     //identity
-    fn new() -> Assemblage {
+    pub fn new() -> Assemblage {
         Assemblage {
             components: Vec::new(),
             ..Default::default()
@@ -92,13 +85,3 @@ pub fn add(a: Assemblage, b: Assemblage) -> Assemblage {
     Assemblage::new()
         .components(vec![Box::new(a), Box::new(b)])
 }
-
-pub fn identity() -> Assemblage {
-    Assemblage::new()
-}
-
-
-
-
-
-
