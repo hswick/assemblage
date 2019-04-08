@@ -1,11 +1,12 @@
 use std::fmt;
 
+//Proper noun
 #[derive(Debug, Clone)]
 pub struct Assemblage {
-    name: String,
+    pub name: String,
     relation: Option<(Box<Assemblage>, Box<Assemblage>)>,
-    intensity: f64,
-    log: Vec<f64>
+    pub intensity: f64,
+    log: Vec<f64>// Trajectory through possibility space for a single dimension
 }
 
 impl Assemblage {
@@ -66,4 +67,16 @@ pub fn and(a: Assemblage, b: Assemblage, name: &str, intensity: f64) -> Assembla
         .name(name)
         .intensity(intensity)
         .relation((a, b))
+}
+
+pub fn and_fold(identity: Assemblage, v: Vec<Assemblage>) -> Assemblage  {
+    v.iter().fold(identity, |sum, x| and(sum.clone(), x.clone(), &format!("{} and {}", &sum.name, &x.name), 0.0))
+}
+
+pub fn reduce(v: Vec<Assemblage>) -> Assemblage {
+    and_fold(v[0].clone(), v[1..].to_vec())
+}
+
+pub fn reduce_names(names: Vec<&str>) -> Assemblage {
+    reduce(names.iter().map(|n| null().name(n)).collect())
 }

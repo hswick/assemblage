@@ -23,5 +23,23 @@ fn main() {
     let harley = assemblage::null().name("Harley");
     let love = assemblage::and(harley, allison, "Love of Harley and Allison", 1.0);
     println!("{}", love);
+
+    // Folds
+    let assemblage_fold2 = assemblage::and_fold(
+        assemblage::null().name("One"),
+        vec![assemblage::null().name("Two")]
+    );
+    println!("{}", assemblage_fold2);
+
+    let mut v = Vec::new();
+    v.push(assemblage::null().name("One"));
+    v.push(assemblage::null().name("Two"));
+    v.push(assemblage::null().name("Three"));
+    v.push(assemblage::null().name("Four"));
+    let assemblage_fold4 = assemblage::reduce(v);
+    println!("{}", assemblage_fold4);
+
+    let assemblage_fold5 = assemblage::reduce_names(vec!["One", "Two", "Three", "Four", "Five"]);
+    println!("{}", assemblage_fold5);
    
 }
