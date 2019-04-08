@@ -70,7 +70,7 @@ pub fn and(a: Assemblage, b: Assemblage, name: &str, intensity: f64) -> Assembla
 }
 
 pub fn and_fold(identity: Assemblage, v: Vec<Assemblage>) -> Assemblage  {
-    v.iter().fold(identity, |sum, x| and(sum.clone(), x.clone(), &format!("{} and {}", &sum.name, &x.name), 0.0))
+    v.iter().fold(identity, |sum, x| and(sum.clone(), x.clone(), &format!("(and {} {})", &x.name, &sum.name), 0.0))
 }
 
 pub fn reduce(v: Vec<Assemblage>) -> Assemblage {
